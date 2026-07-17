@@ -140,14 +140,14 @@
   /* ---------- HERO (CAPA 100% TELA) ---------- */
   .hero{
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     position: relative;
     overflow: hidden;
-    /* Usando background-image para garantir cobertura total sem bordas */
-    background-image: url('images/bianca.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    /* Imagem para Computador por padrão */
+    background-image: url('images/bianca_desktop.png');
   }
 
   /* ---------- SECTION GENERIC ---------- */
@@ -301,13 +301,15 @@
     font-weight: 700;
   }
 
+  /* MEDIA QUERIES PARA RESPONSIVIDADE TOTAL */
   @media(max-width:900px){
     .about-grid, .parceria-grid{ grid-template-columns:1fr; text-align: center; }
     .about-title .eyebrow, .parceria-content .eyebrow { justify-content: center; }
     .mascote-container { width: 70px; bottom: 10px; right: 10px; }
     .parceria-img { order: -1; }
+    /* Imagem para Celular */
     .hero {
-      background-position: center; /* Centraliza a foto no celular */
+      background-image: url('images/bianca_mobile.png');
     }
   }
 </style>
@@ -400,7 +402,7 @@
       </div>
       <div class="photo-grid">
         <div class="photo-card">
-          <img src="images/exame_cachorro_mao.jpg" alt="Ultrassom Canino">
+          <img src="images/exame_cachorro_ultra_realista.jpg" alt="Ultrassom Canino Ultra-realista">
         </div>
         <div class="photo-card">
           <img src="images/exame_gato_mao.jpg" alt="Ultrassom Felino">
