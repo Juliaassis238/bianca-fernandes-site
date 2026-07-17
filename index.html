@@ -16,13 +16,13 @@
     --bg-soft: #EFF4F9;
     --surface: #E6EEF5;
     --ink: #0A0C0E;
-    --ink-dim: #1A1D21; /* Tornando mais escuro conforme pedido */
-    --stone: #2A2F35; /* Tornando mais escuro conforme pedido */
+    --ink-dim: #1A1D21;
+    --stone: #2A2F35;
     --accent: #35617F;
     --accent-2: #6E97B2;
     --accent-soft: rgba(53,97,127,0.16);
-    --line: rgba(10,12,14,0.15); /* Aumentando contraste */
-    --line-strong: rgba(10,12,14,0.3); /* Aumentando contraste */
+    --line: rgba(10,12,14,0.15);
+    --line-strong: rgba(10,12,14,0.3);
     --blue-light: #E8F0F8;
     --serif: 'Fraunces', serif;
     --sans: 'Inter', sans-serif;
@@ -30,6 +30,10 @@
     --ease: cubic-bezier(.22,1,.36,1);
     --shadow: 0 40px 80px -40px rgba(10,20,30,0.18);
     --shadow-sm: 0 18px 40px -22px rgba(10,20,30,0.16);
+    /* Efeito Vidro */
+    --glass: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
   }
 
   *{ margin:0; padding:0; box-sizing:border-box; }
@@ -38,7 +42,7 @@
     background:var(--bg);
     color:var(--ink);
     font-family:var(--sans);
-    font-weight:300;
+    font-weight:400;
     line-height:1.6;
     overflow-x:hidden;
     -webkit-font-smoothing:antialiased;
@@ -48,492 +52,334 @@
   a{ color:inherit; text-decoration:none; }
   img{ display:block; max-width:100%; }
 
-  .grain{
-    position:fixed; inset:0; z-index:999; pointer-events:none;
-    opacity:.02; mix-blend-mode:multiply;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  }
-
   .wrap{ max-width:1180px; margin:0 auto; padding:0 6vw; }
 
-  /* ---------- SEPARATOR ORNAMENT ---------- */
-  .ornament{ display:flex; align-items:center; justify-content:center; gap:14px; }
-  .ornament::before, .ornament::after{ content:''; height:1px; width:64px; background:var(--line-strong); }
-  .ornament i{ width:6px; height:6px; border:1px solid var(--accent); transform:rotate(45deg); display:block; }
+  /* ---------- GLASS BOX ---------- */
+  .glass-box {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 20px;
+    padding: 2.5rem;
+    transition: transform 0.3s ease;
+  }
+  .glass-box:hover {
+    transform: translateY(-5px);
+  }
 
   /* ---------- NAV ---------- */
   header{
     position:fixed; top:0; left:0; right:0; z-index:500;
-    padding:28px 6vw;
+    padding:20px 6vw;
     display:flex; align-items:center; justify-content:space-between;
-    transition:background .5s var(--ease), padding .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease);
-    border-bottom:1px solid transparent;
+    transition: all .5s var(--ease);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
   }
   header.scrolled{
-    background:rgba(255,255,255,0.9);
-    backdrop-filter:blur(12px);
-    padding:17px 6vw;
-    border-bottom:1px solid var(--line);
+    padding:12px 6vw;
     box-shadow:0 12px 30px -20px rgba(10,20,30,0.18);
   }
-  .brand{
-    font-family:var(--serif); font-style:italic; font-weight:500;
-    font-size:1.08rem; letter-spacing:.02em; color:var(--ink);
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
-  nav.links{ display:flex; gap:2.6rem; align-items:center; }
+  .header-logo img {
+    height: 45px;
+    width: auto;
+  }
+  .brand{
+    font-family:var(--serif); font-style:italic; font-weight:600;
+    font-size:1.2rem; letter-spacing:.02em; color:var(--ink);
+  }
+  nav.links{ display:flex; gap:2rem; align-items:center; }
   nav.links a{
-    font-family:var(--mono); font-size:.68rem; letter-spacing:.14em;
-    text-transform:uppercase; color:var(--ink); /* Mais escuro */
+    font-family:var(--mono); font-size:.75rem; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink);
     position:relative; padding-bottom:3px;
     transition:color .35s var(--ease);
     font-weight: 700;
   }
-  nav.links a::after{
-    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
-    background:var(--accent); transition:width .4s var(--ease);
-  }
-  nav.links a:hover{ color:var(--ink); }
-  nav.links a:hover::after{ width:100%; }
+  nav.links a:hover{ color:var(--accent); }
   .nav-cta{
-    font-family:var(--mono); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
-    border:1px solid var(--line-strong); padding:.68rem 1.2rem; transition:.35s var(--ease);
+    background: var(--ink);
+    color: #fff !important;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
   }
-  .nav-cta:hover{ border-color:var(--accent); color:var(--accent); }
-  @media(max-width:820px){ nav.links a:not(.nav-cta){ display:none; } }
+  .nav-cta:hover{ background:var(--accent); transform: scale(1.05); }
+  
+  @media(max-width:820px){ 
+    nav.links a:not(.nav-cta){ display:none; }
+    .brand { font-size: 1rem; }
+  }
+
+  /* ---------- MASCOTE ANIMADO ---------- */
+  .mascote-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 100px;
+    pointer-events: none;
+  }
+  .mascote-container img {
+    width: 100%;
+    animation: bounce 3s infinite ease-in-out;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+  }
 
   /* ---------- HERO ---------- */
   .hero{
     min-height:100vh;
     display:flex; align-items:center;
     position:relative;
-    padding-top:120px; padding-bottom:70px;
-    /* Fundo de patinhas solicitado */
+    padding-top:140px; padding-bottom:70px;
     background-image: url('images/patinhas.png');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
   }
   .hero-grid{
     position:relative; z-index:2;
     display:grid; grid-template-columns:1.15fr .85fr; gap:5vw; align-items:center;
     width:100%;
   }
+  .hero-content {
+    padding-right: 20px;
+  }
   .hero-eyebrow{
-    font-family:var(--mono); font-size:.7rem; letter-spacing:.22em; text-transform:uppercase;
-    color:var(--accent); margin-bottom:2rem; display:flex; align-items:center; gap:14px;
+    font-family:var(--mono); font-size:.75rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:1.5rem; display:flex; align-items:center; gap:14px;
     font-weight: 700;
   }
-  .hero-eyebrow::before{ content:''; width:38px; height:1px; background:var(--accent); display:inline-block; }
+  .hero-eyebrow::before{ content:''; width:38px; height:2px; background:var(--accent); display:inline-block; }
 
   .hero h1{
-    font-family:var(--serif); font-weight:400;
-    font-size:clamp(3.1rem, 6.2vw, 5.6rem);
-    line-height:0.96; letter-spacing:-.015em;
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(2.8rem, 5vw, 4.8rem);
+    line-height:1.1; letter-spacing:-.015em;
     color:var(--ink);
+    margin-bottom: 1.5rem;
   }
   .hero h1 em{
-    font-style:italic; font-weight:400; color:var(--accent);
-    display:block; font-size:.4em; margin-top:.7rem; letter-spacing:0;
+    font-style:italic; font-weight:500; color:var(--accent);
   }
 
   .hero p.lede{
-    margin-top:2.1rem; max-width:40ch;
-    font-size:1.08rem; color:var(--ink); font-weight:500;
+    font-size:1.15rem; color:var(--ink); font-weight:500;
+    margin-bottom: 2.5rem;
   }
 
-  .hero-meta{
-    margin-top:2.7rem;
-    font-family:var(--mono); font-size:.72rem; letter-spacing:.14em;
-    color:var(--ink); text-transform:uppercase;
-  }
-
-  .cta-row{ display:flex; align-items:center; gap:2.3rem; margin-top:3.1rem; flex-wrap:wrap; }
   .btn-primary{
-    font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
-    background:var(--ink); color:#fff; padding:1.1rem 2.2rem;
-    border-radius:1px; display:inline-flex; align-items:center; gap:10px;
-    transition:transform .4s var(--ease), background .4s var(--ease), box-shadow .4s var(--ease);
-    box-shadow:0 0 0 0 rgba(53,97,127,0);
-  }
-  .btn-primary:hover{ background:var(--accent); transform:translateY(-3px); box-shadow:0 20px 40px -16px rgba(53,97,127,.5); }
-  .link-ghost{
-    font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--ink); border-bottom:1px solid var(--line-strong); padding-bottom:4px;
-    transition:color .35s, border-color .35s;
+    font-family:var(--mono); font-size:.8rem; letter-spacing:.1em; text-transform:uppercase;
+    background:var(--ink); color:#fff; padding:1.2rem 2.5rem;
+    border-radius:50px; display:inline-flex; align-items:center; gap:10px;
+    transition: all .4s var(--ease);
     font-weight: 700;
   }
-  .link-ghost:hover{ color:var(--accent); border-color:var(--accent); }
-
-  /* ---------- IMAGE FRAMES ---------- */
-  .img-slot{
-    width:100%; height:100%; position:relative;
-    background:var(--blue-light);
-    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:.7rem;
-  }
-  .img-slot.has-image{
-    background:transparent;
-    display:block;
-  }
-  .img-slot img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-  }
-  .img-slot .ring{
-    position:absolute; border:1px solid rgba(53,97,127,0.26); border-radius:50%;
-  }
-  .img-slot .ring.r1{ width:44%; aspect-ratio:1/1; }
-  .img-slot .ring.r2{ width:68%; aspect-ratio:1/1; opacity:.6; }
-  .img-slot .ring.r3{ width:92%; aspect-ratio:1/1; opacity:.32; }
-  .img-slot .mono-mark{
-    position:relative; font-family:var(--serif); font-style:italic; font-weight:400;
-    font-size:2.5rem; color:var(--accent); z-index:2;
-  }
-  .img-slot .slot-label{
-    position:relative; font-family:var(--mono); font-size:.6rem; letter-spacing:.18em;
-    text-transform:uppercase; color:var(--stone); z-index:2;
-  }
-
-  /* corner brackets */
-  .bracket-frame{ position:relative; }
-  .bracket-frame::before, .bracket-frame::after,
-  .bracket-frame .bk-b::before, .bracket-frame .bk-b::after{
-    content:''; position:absolute; width:18px; height:18px; z-index:5;
-    border-color:var(--accent); border-style:solid; border-width:0;
-  }
-  .bracket-frame::before{ top:-1px; left:-1px; border-top-width:1px; border-left-width:1px; }
-  .bracket-frame::after{ top:-1px; right:-1px; border-top-width:1px; border-right-width:1px; }
-  .bracket-frame .bk-b{ position:absolute; inset:0; pointer-events:none; }
-  .bracket-frame .bk-b::before{ bottom:-1px; left:-1px; border-bottom-width:1px; border-left-width:1px; }
-  .bracket-frame .bk-b::after{ bottom:-1px; right:-1px; border-bottom-width:1px; border-right-width:1px; }
+  .btn-primary:hover{ background:var(--accent); transform:translateY(-3px) scale(1.02); box-shadow:0 20px 40px -16px rgba(53,97,127,.5); }
 
   .hero-portrait{
     position:relative; justify-self:end;
-    width:min(370px, 78vw);
+    width:100%;
+    max-width: 420px;
   }
   .portrait-frame{
     position:relative; aspect-ratio:4/5; overflow:hidden;
     background:#fff;
+    border-radius: 30px;
     box-shadow:var(--shadow);
-    clip-path:inset(0 0 100% 0);
-    animation:scanReveal 1.4s .5s var(--ease) forwards;
+    border: 10px solid #fff;
   }
-  .scan-beam{
-    position:absolute; left:0; right:0; top:0; height:2px;
-    background:linear-gradient(90deg, transparent, var(--accent), transparent);
-    box-shadow:0 0 18px 2px var(--accent-soft);
-    opacity:0; z-index:6;
-    animation:beamSweep 1.4s .5s var(--ease) forwards;
+  .portrait-frame img{
+    width:100%; height:100%; object-fit:cover;
   }
-  @keyframes scanReveal{ to{ clip-path:inset(0 0 0% 0); } }
-  @keyframes beamSweep{
-    0%{ top:0%; opacity:1; }
-    92%{ opacity:1; }
-    100%{ top:100%; opacity:0; }
-  }
-  .portrait-cap{
-    display:flex; justify-content:space-between; align-items:baseline;
-    margin-top:1.1rem; font-family:var(--mono); font-size:.65rem; letter-spacing:.1em;
-    color:var(--ink); text-transform:uppercase;
-  }
-
-  /* ---------- TICKER ---------- */
-  .ticker-wrap{
-    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    overflow:hidden; white-space:nowrap; padding:1.2rem 0;
-    background-image: url('images/patinhas.png');
-    background-size: cover;
-    background-position: center;
-    -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-            mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  }
-  .ticker{
-    display:inline-block; white-space:nowrap;
-    animation:ticker 42s linear infinite;
-    font-family:var(--mono); font-size:.72rem; letter-spacing:.18em;
-    color:var(--ink); text-transform:uppercase;
-    font-weight: 700;
-  }
-  .ticker span{ margin:0 2.3rem; }
-  .ticker span em{ color:var(--accent); font-style:normal; }
-  @keyframes ticker{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 
   /* ---------- SECTION GENERIC ---------- */
   section{ 
-    padding:9.5rem 0; 
+    padding:8rem 0; 
     position:relative; 
     background-image: url('images/patinhas.png');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
   }
   
   .eyebrow{
-    font-family:var(--mono); font-size:.7rem; letter-spacing:.22em; text-transform:uppercase;
-    color:var(--accent); margin-bottom:1.7rem; display:flex; align-items:center; gap:14px;
+    font-family:var(--mono); font-size:.75rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:1.5rem; display:flex; align-items:center; gap:14px;
     font-weight: 700;
   }
-  .eyebrow::before{ content:''; width:38px; height:1px; background:var(--accent); display:inline-block; }
-
-  .reveal{ opacity:0; transform:translateY(36px); transition:opacity 1.1s var(--ease), transform 1.1s var(--ease); }
-  .reveal.is-in{ opacity:1; transform:translateY(0); }
-  .reveal-d1{ transition-delay:.08s; } .reveal-d2{ transition-delay:.16s; } .reveal-d3{ transition-delay:.24s; } .reveal-d4{ transition-delay:.32s; }
+  .eyebrow::before{ content:''; width:38px; height:2px; background:var(--accent); display:inline-block; }
 
   /* ---------- SOBRE ---------- */
-  .about-grid{ display:grid; grid-template-columns:.9fr 1.1fr; gap:6vw; align-items:start; }
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:4vw; align-items:center; }
   .about-grid h2{
-    font-family:var(--serif); font-weight:400; font-size:clamp(1.95rem,3vw,2.7rem);
-    line-height:1.28; color:var(--ink);
+    font-family:var(--serif); font-weight:600; font-size:clamp(1.8rem,3vw,2.5rem);
+    line-height:1.2; color:var(--ink);
+    margin-bottom: 1.5rem;
   }
-  .about-grid h2::first-letter{
-    font-size:3.5em; float:left; line-height:.76; padding-right:.1em; padding-top:.03em;
-    color:var(--accent); font-style:italic;
-  }
-  .about-body p{ color:var(--ink); font-size:1.02rem; margin-bottom:1.35rem; max-width:52ch; font-weight: 500; }
-  .about-body p strong{ color:var(--ink); font-weight:700; }
-  .credentials{ margin-top:2.5rem; border-top:1px solid var(--line); }
-  .cred-row{
-    display:flex; justify-content:space-between; gap:2rem; padding:1.3rem 0;
-    border-bottom:1px solid var(--line);
-    font-size:.94rem; transition:padding-left .4s var(--ease);
-  }
-  .cred-row:hover{ padding-left:.4rem; }
-  .cred-row .label{ font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); white-space:nowrap; font-weight: 700; }
-  .cred-row .value{ color:var(--ink); text-align:right; max-width:60%; font-weight: 500; }
+  .about-body p{ color:var(--ink); font-size:1.1rem; margin-bottom:1.2rem; font-weight: 500; }
+  .about-body p strong{ color:var(--accent); font-weight:700; }
 
   /* ---------- SERVICOS ---------- */
-  .service-list{ margin-top:3.6rem; border-top:1px solid var(--line); }
-  .service-row{
-    display:grid; grid-template-columns:.55fr 2fr 1fr; gap:2rem; align-items:center;
-    padding:2.5rem 0; border-bottom:1px solid var(--line);
-    position:relative; overflow:hidden; transition:padding-left .5s var(--ease);
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
   }
-  .service-row:hover{ padding-left:.6rem; }
-  .service-row .num{ font-family:var(--mono); font-size:.75rem; color:var(--ink); letter-spacing:.05em; font-weight: 700; }
-  .service-row h3{
-    font-family:var(--serif); font-weight:400; font-style:italic;
-    font-size:clamp(1.32rem,2.2vw,1.75rem); color:var(--ink);
+  .service-card {
+    padding: 2.5rem;
+    text-align: center;
   }
-  .service-row p{ color:var(--ink); font-size:.94rem; max-width:34ch; font-weight: 500; }
-  .service-row::after{
-    content:''; position:absolute; left:0; top:0; bottom:0; width:2px;
-    background:linear-gradient(180deg, transparent, var(--accent), transparent);
-    box-shadow:0 0 16px 2px var(--accent-soft);
-    transform:translateY(-100%);
+  .service-card .num {
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: block;
   }
-  .service-row.is-in::after{ animation:beamDown 1.1s var(--ease) forwards; }
-  @keyframes beamDown{ to{ transform:translateY(100%); } }
-
-  /* ---------- TRAJETORIA / TIMELINE ---------- */
-  .timeline{ margin-top:4.2rem; position:relative; padding-left:72px; }
-  .ruler{
-    position:absolute; left:0; top:0; bottom:0; width:40px;
-    display:flex; flex-direction:column; justify-content:space-between;
-    font-family:var(--mono); font-size:.62rem;
-    border-right:1px solid var(--line);
+  .service-card h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
   }
-  .ruler span{ position:relative; padding-right:10px; text-align:right; color:var(--ink); font-weight: 700; }
-  .ruler span::after{ content:''; position:absolute; right:-1px; top:50%; width:8px; height:1px; background:var(--line-strong); }
-
-  .tl-item{ position:relative; padding:0 0 3.7rem 2.7rem; border-left:1px solid var(--line); }
-  .tl-item:last-child{ padding-bottom:0; }
-  .tl-item::before{
-    content:''; position:absolute; left:-5px; top:.35rem; width:9px; height:9px;
-    border-radius:50%; background:#fff; border:1px solid var(--accent);
+  .service-card p {
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 500;
   }
-  .tl-date{ font-family:var(--mono); font-size:.7rem; letter-spacing:.1em; color:var(--accent); text-transform:uppercase; font-weight: 700; }
-  .tl-item h3{ font-family:var(--serif); font-weight:400; font-size:1.4rem; margin:.5rem 0 .5rem; color:var(--ink); }
-  .tl-item p{ color:var(--ink); font-size:.94rem; max-width:52ch; font-weight: 500; }
-
-  /* ---------- PARCERIA ---------- */
-  .partner-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6vw; align-items:center; }
-  .partner-copy h2{
-    font-family:var(--serif); font-weight:400; font-style:italic;
-    font-size:clamp(2.05rem,3.4vw,2.95rem); line-height:1.22; color:var(--ink); margin-bottom:1.7rem;
-  }
-  .partner-copy p{ color:var(--ink); max-width:46ch; margin-bottom:1.05rem; font-size:1rem; font-weight: 500; }
-  .partner-visual{
-    position:relative; padding:16px;
-    background:#fff;
-    box-shadow:var(--shadow-sm);
-    transform:rotate(-1deg);
-  }
-  .partner-visual .slot-inner{
-    aspect-ratio:4/5; overflow:hidden; position:relative;
-    clip-path:inset(0 0 100% 0);
-  }
-  .partner-visual.is-in .slot-inner{ animation:scanReveal 1.3s var(--ease) forwards; }
-  .partner-visual .tag{
-    position:absolute; bottom:-15px; right:20px; background:var(--ink); color:#fff;
-    font-family:var(--mono); font-size:.62rem; letter-spacing:.09em; text-transform:uppercase;
-    padding:.55rem .95rem;
-  }
-
-  /* ---------- ATENDIMENTO DOMICILIAR ---------- */
-  .home-visit{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-  .home-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6vw; align-items:center; }
-  .phone-frame{
-    position:relative; justify-self:center;
-    width:min(264px, 70vw); border-radius:28px; padding:11px; background:#fff;
-    box-shadow:var(--shadow-sm);
-  }
-  .phone-frame .screen{ overflow:hidden; border-radius:19px; position:relative; aspect-ratio:9/17.5; clip-path:inset(0 0 100% 0); }
-  .phone-frame.is-in .screen{ animation:scanReveal 1.3s var(--ease) forwards; }
-  .home-copy h2{
-    font-family:var(--serif); font-weight:400; font-style:italic;
-    font-size:clamp(2.05rem,3.4vw,2.95rem); color:var(--ink); margin-bottom:1.7rem; line-height:1.22;
-  }
-  .home-copy p{ color:var(--ink); max-width:46ch; margin-bottom:1.15rem; font-size:1rem; font-weight: 500; }
-  .home-copy ul{ margin-top:1.7rem; border-top:1px solid var(--line); }
-  .home-copy li{
-    list-style:none; padding:1.05rem 0; border-bottom:1px solid var(--line);
-    font-family:var(--mono); font-size:.72rem; letter-spacing:.09em; text-transform:uppercase;
-    color:var(--ink); display:flex; justify-content:space-between; font-weight: 700;
-  }
-  .home-copy li b{ color:var(--accent); font-weight:700; }
 
   /* ---------- GALERIA FOTOS ---------- */
-  .gallery-section{ padding:9.5rem 0; }
   .gallery-title{
     text-align:center; margin-bottom:4rem;
   }
-  .gallery-title .eyebrow{
-    justify-content:center;
-  }
   .gallery-title h2{
-    font-family:var(--serif); font-weight:400;
-    font-size:clamp(2rem,4vw,3rem); color:var(--ink); margin-top:1rem;
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(2rem,4vw,3rem); color:var(--ink);
   }
   .photo-grid{
-    display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:3rem;
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(350px, 1fr)); gap:3rem;
     margin-top:3rem;
   }
   .photo-card{
-    position:relative; overflow:hidden; aspect-ratio:4/5;
-    border-radius:8px; box-shadow:var(--shadow-sm);
+    position:relative; overflow:hidden; aspect-ratio:4/3;
+    border-radius:25px; box-shadow:var(--shadow-sm);
     background:#fff;
+    border: 8px solid #fff;
+    transition: transform 0.4s ease;
   }
+  .photo-card:hover { transform: scale(1.03); }
   .photo-card img{
     width:100%; height:100%; object-fit:cover;
   }
-  .photo-card.reveal{ opacity:0; transform:translateY(40px); transition:opacity 1.1s var(--ease), transform 1.1s var(--ease); }
-  .photo-card.is-in{ opacity:1; transform:translateY(0); }
   
   /* ---------- CONTATO ---------- */
   .contact{ text-align:center; }
-  .contact .ornament{ margin-bottom:1.6rem; }
-  .contact .eyebrow{ justify-content:center; }
   .contact h2{
-    font-family:var(--serif); font-weight:400;
-    font-size:clamp(2.4rem,5vw,4.1rem); max-width:18ch; margin:0 auto; line-height:1.14; color:var(--ink);
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(2.2rem,5vw,3.5rem); max-width:18ch; margin:0 auto 2.5rem; line-height:1.1; color:var(--ink);
   }
   .contact h2 em{ color:var(--accent); font-style:italic; }
-  .contact-cta{ margin-top:3.1rem; display:flex; justify-content:center; }
   .contact-links{
-    margin-top:3.5rem; display:flex; justify-content:center; gap:3rem; flex-wrap:wrap;
-    font-family:var(--mono); font-size:.75rem; letter-spacing:.1em; text-transform:uppercase;
+    display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap;
+    font-family:var(--mono); font-size:.9rem; letter-spacing:.1em; text-transform:uppercase;
     font-weight: 700;
   }
-  .contact-links a{ color:var(--ink); border-bottom:1px solid var(--ink); padding-bottom:4px; transition:.35s; }
-  .contact-links a:hover{ color:var(--accent); border-color:var(--accent); }
+  .contact-links a{ 
+    color:var(--ink); 
+    padding: 12px 25px;
+    background: var(--glass);
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    transition:.35s; 
+  }
+  .contact-links a:hover{ background: var(--accent); color: #fff; transform: translateY(-3px); }
 
   footer{
-    padding:3.2rem 0 2.6rem; border-top:1px solid var(--line);
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
-    font-family:var(--mono); font-size:.65rem; letter-spacing:.09em; color:var(--ink); text-transform:uppercase;
+    padding:3rem 0;
+    background: rgba(255, 255, 255, 0.9);
+    border-top:1px solid var(--line);
+    text-align: center;
+    font-family:var(--mono); font-size:.75rem; letter-spacing:.09em; color:var(--ink); text-transform:uppercase;
     font-weight: 700;
   }
 
   @media(max-width:900px){
-    .hero-grid{ grid-template-columns:1fr; gap:3.5rem; }
-    .hero-portrait{ justify-self:start; }
-    .about-grid{ grid-template-columns:1fr; }
-    .cred-row .value{ text-align:left; max-width:100%; }
-  }
-  @media(max-width:600px){
-    section{ padding:5.6rem 0; }
-    .hero{ padding-top:104px; }
-    .timeline{ padding-left:54px; }
-    .ruler{ width:30px; }
-    .photo-grid{ grid-template-columns:1fr; gap:2rem; }
+    .hero-grid{ grid-template-columns:1fr; gap:3rem; text-align: center; }
+    .hero-eyebrow { justify-content: center; }
+    .hero-portrait{ justify-self:center; max-width: 320px; }
+    .about-grid{ grid-template-columns:1fr; text-align: center; }
+    .about-title .eyebrow { justify-content: center; }
+    .mascote-container { width: 70px; bottom: 10px; right: 10px; }
   }
 </style>
 </head>
 <body>
 
-<div class="grain"></div>
-
 <header id="header">
-  <div class="wrap">
-    <div class="brand">Bianca Fernandes</div>
+  <div class="wrap" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+    <div class="header-logo">
+      <img src="images/logo.png" alt="Logo Dra. Bianca Fernandes">
+      <div class="brand">Dra. Bianca Fernandes</div>
+    </div>
     <nav class="links">
       <a href="#sobre">Sobre</a>
       <a href="#servicos">Serviços</a>
-      <a href="#contato" class="nav-cta">Contato</a>
+      <a href="#galeria">Exames</a>
+      <a href="#contato" class="nav-cta">Agendar</a>
     </nav>
   </div>
 </header>
+
+<div class="mascote-container">
+  <img src="images/mascote.png" alt="Mascote Dra. Bianca">
+</div>
 
 <main>
   <section class="hero">
     <div class="wrap">
       <div class="hero-grid">
-        <div class="hero-content">
+        <div class="hero-content glass-box">
           <div class="hero-eyebrow">Médica Veterinária</div>
           <h1>Diagnóstico por <em>Imagem</em></h1>
           <p class="lede">Ultrassonografia volante e domiciliar com precisão e carinho para o seu melhor amigo.</p>
-          <div class="hero-meta">Atendimento Mogi Guaçu — Jundiaí</div>
           <div class="cta-row">
             <a href="#contato" class="btn-primary">Agendar Exame</a>
-            <a href="#servicos" class="link-ghost">Nossos Serviços</a>
           </div>
         </div>
         <div class="hero-portrait">
-          <div class="bracket-frame">
-            <div class="bk-b"></div>
-            <div class="portrait-frame">
-              <div class="scan-beam"></div>
-              <img src="images/bianca.png" alt="Dra. Bianca Fernandes">
-            </div>
-          </div>
-          <div class="portrait-cap">
-            <span>Dra. Bianca Fernandes</span>
-            <span>CRMV-SP 00000</span>
+          <div class="portrait-frame">
+            <img src="images/bianca.png" alt="Dra. Bianca Fernandes">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <span>Ultrassonografia <em>Abdominal</em></span>
-      <span>Atendimento <em>Volante</em></span>
-      <span>Diagnóstico <em>Preciso</em></span>
-      <span>Ultrassonografia <em>Abdominal</em></span>
-      <span>Atendimento <em>Volante</em></span>
-      <span>Diagnóstico <em>Preciso</em></span>
-    </div>
-  </div>
-
   <section id="sobre">
     <div class="wrap">
-      <div class="about-grid">
+      <div class="about-grid glass-box">
         <div class="about-title">
           <div class="eyebrow">Sobre a Doutora</div>
-          <h2 class="reveal">Dedicada ao cuidado e à precisão diagnóstica.</h2>
+          <h2>Dedicada ao cuidado e à precisão diagnóstica.</h2>
         </div>
         <div class="about-body">
-          <p class="reveal reveal-d1">Formada em Medicina Veterinária, a Dra. Bianca Fernandes especializou-se em <strong>Diagnóstico por Imagem</strong>, focando na ultrassonografia como ferramenta essencial para o bem-estar animal.</p>
-          <p class="reveal reveal-d2">Seu atendimento combina tecnologia de ponta com um olhar humanizado, garantindo que cada pet receba o melhor cuidado possível.</p>
-          <div class="credentials reveal reveal-d3">
-            <div class="cred-row">
-              <span class="label">Especialidade</span>
-              <span class="value">Ultrassonografia Veterinária</span>
-            </div>
-            <div class="cred-row">
-              <span class="label">Experiência</span>
-              <span class="value">+5 anos de atuação</span>
-            </div>
-          </div>
+          <p>Formada em Medicina Veterinária, a Dra. Bianca Fernandes especializou-se em <strong>Diagnóstico por Imagem</strong>, focando na ultrassonografia como ferramenta essencial para o bem-estar animal.</p>
+          <p>Seu atendimento combina tecnologia de ponta com um olhar humanizado, garantindo que cada pet receba o melhor cuidado possível no conforto de casa ou na clínica parceira.</p>
         </div>
       </div>
     </div>
@@ -542,19 +388,19 @@
   <section id="servicos">
     <div class="wrap">
       <div class="eyebrow">Serviços</div>
-      <div class="service-list">
-        <div class="service-row reveal">
-          <div class="num">01</div>
+      <div class="service-grid">
+        <div class="service-card glass-box">
+          <span class="num">01</span>
           <h3>Ultrassonografia Abdominal</h3>
           <p>Exame completo para avaliação de órgãos internos em cães e gatos.</p>
         </div>
-        <div class="service-row reveal">
-          <div class="num">02</div>
+        <div class="service-card glass-box">
+          <span class="num">02</span>
           <h3>Atendimento Volante</h3>
           <p>Realização de exames em clínicas parceiras com agilidade e precisão.</p>
         </div>
-        <div class="service-row reveal">
-          <div class="num">03</div>
+        <div class="service-card glass-box">
+          <span class="num">03</span>
           <h3>Atendimento Domiciliar</h3>
           <p>Conforto para o pet e praticidade para o tutor no ambiente de casa.</p>
         </div>
@@ -562,17 +408,17 @@
     </div>
   </section>
 
-  <section class="gallery-section">
+  <section id="galeria">
     <div class="wrap">
       <div class="gallery-title">
         <div class="eyebrow">Exames</div>
         <h2>Galeria de Diagnóstico</h2>
       </div>
       <div class="photo-grid">
-        <div class="photo-card reveal">
+        <div class="photo-card">
           <img src="images/exame_cachorro_mao.jpg" alt="Ultrassom Canino">
         </div>
-        <div class="photo-card reveal reveal-d1">
+        <div class="photo-card">
           <img src="images/exame_gato_mao.jpg" alt="Ultrassom Felino">
         </div>
       </div>
@@ -581,13 +427,14 @@
 
   <section id="contato" class="contact">
     <div class="wrap">
-      <div class="ornament"><i></i></div>
-      <div class="eyebrow">Contato</div>
-      <h2 class="reveal">Vamos cuidar da saúde do seu <em>pet</em>?</h2>
-      <div class="contact-links reveal reveal-d1">
-        <a href="#">WhatsApp</a>
-        <a href="#">Instagram</a>
-        <a href="#">LinkedIn</a>
+      <div class="glass-box">
+        <div class="eyebrow" style="justify-content: center;">Contato</div>
+        <h2>Vamos cuidar da saúde do seu <em>pet</em>?</h2>
+        <div class="contact-links">
+          <a href="#">WhatsApp</a>
+          <a href="#">Instagram</a>
+          <a href="#">E-mail</a>
+        </div>
       </div>
     </div>
   </section>
@@ -595,25 +442,11 @@
 
 <footer>
   <div class="wrap">
-    <span>&copy; 2026 Bianca Fernandes</span>
-    <span>Desenvolvido com carinho</span>
+    <span>&copy; 2026 Bianca Fernandes — Médica Veterinária</span>
   </div>
 </footer>
 
 <script>
-  // Reveal animations
-  const observerOptions = { threshold: 0.1 };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-in');
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.reveal, .service-row, .photo-card').forEach(el => observer.observe(el));
-
-  // Header scroll effect
   window.addEventListener('scroll', () => {
     const header = document.getElementById('header');
     if (window.scrollY > 50) {
