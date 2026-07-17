@@ -10,6 +10,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="images/hero_desktop_blue.webp" media="(min-width: 901px)">
+<link rel="preload" as="image" href="images/hero_mobile_blue.webp" media="(max-width: 900px)">
 <style>
   :root{
     --bg: #ffffff;
@@ -160,7 +162,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('images/hero_desktop_blue.png');
+    background-image: url('images/hero_desktop_blue.webp');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -327,7 +329,7 @@
     .parceria-img { order: -1; }
     /* Imagem para Celular */
     .hero::before {
-      background-image: url('images/hero_mobile_blue.png');
+      background-image: url('images/hero_mobile_blue.webp');
       background-size: contain;
       background-position: center center;
     }
