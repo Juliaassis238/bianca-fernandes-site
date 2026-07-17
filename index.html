@@ -137,20 +137,17 @@
     50% { transform: translateY(-15px) rotate(5deg); }
   }
 
-  /* ---------- HERO (CAPA SÓ FOTO) ---------- */
+  /* ---------- HERO (CAPA 100% TELA) ---------- */
   .hero{
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     position: relative;
     overflow: hidden;
-    background: #000; /* Fundo preto para preencher caso a imagem demore */
-  }
-  .hero img.cover-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
+    /* Usando background-image para garantir cobertura total sem bordas */
+    background-image: url('images/bianca.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   /* ---------- SECTION GENERIC ---------- */
@@ -309,6 +306,9 @@
     .about-title .eyebrow, .parceria-content .eyebrow { justify-content: center; }
     .mascote-container { width: 70px; bottom: 10px; right: 10px; }
     .parceria-img { order: -1; }
+    .hero {
+      background-position: center; /* Centraliza a foto no celular */
+    }
   }
 </style>
 </head>
@@ -335,10 +335,8 @@
 </div>
 
 <main>
-  <!-- CAPA SÓ FOTO -->
-  <section class="hero" id="home">
-    <img src="images/bianca.png" alt="Dra. Bianca Fernandes" class="cover-photo">
-  </section>
+  <!-- CAPA 100% TELA SEM BORDAS -->
+  <section class="hero" id="home"></section>
 
   <section id="sobre">
     <div class="wrap">
