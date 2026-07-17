@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#ffffff">
+<title>Bianca Fernandes — Médica Veterinária · Diagnóstico por Imagem</title>
+<meta name="description" content="Dra. Bianca Fernandes — Ultrassonografia Veterinária. Atendimento volante para clínicas parceiras e atendimento domiciliar entre Mogi Guaçu e Jundiaí, SP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #ffffff;
+    --bg-soft: #EFF4F9;
+    --surface: #E6EEF5;
+    --ink: #0A0C0E; /* Texto bem escuro como solicitado */
+    --ink-dim: #1A1D21; /* Texto secundário também escuro */
+    --stone: #2A2F35; /* Detalhes mais escuros */
+    --accent: #1B3B52; /* Azul acentuado mais escuro */
+    --accent-2: #35617F;
+    --accent-soft: rgba(27, 59, 82, 0.16);
+    --line: rgba(10,12,14,0.15);
+    --line-strong: rgba(10,12,14,0.3);
+    --blue-light: #E8F0F8;
+    --serif: 'Fraunces', serif;
+    --sans: 'Inter', sans-serif;
+    --mono: 'Space Mono', monospace;
+    --ease: cubic-bezier(.22,1,.36,1);
+    --shadow: 0 40px 80px -40px rgba(10,20,30,0.18);
+    --shadow-sm: 0 18px 40px -22px rgba(10,20,30,0.16);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    /* Fundo de patinhas em todo o site */
+    background-image: url('images/patinhas.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:400; /* Aumentado para melhor leitura em fundo com imagem */
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* Overlay para garantir contraste do texto sobre o fundo de patinhas */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.75); /* Camada branca semi-transparente */
+    z-index: -1;
+  }
+
+  ::selection{ background:var(--accent); color:#fff; }
+  a{ color:inherit; text-decoration:none; }
+  img{ display:block; max-width:100%; }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 6vw; }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:500;
+    padding:28px 6vw;
+    display:flex; align-items:center; justify-content:space-between;
+    transition:background .5s var(--ease), padding .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(12px);
+    padding:17px 6vw;
+    border-bottom:1px solid var(--line);
+    box-shadow:0 12px 30px -20px rgba(10,20,30,0.18);
+  }
+  .brand{
+    font-family:var(--serif); font-style:italic; font-weight:600;
+    font-size:1.08rem; letter-spacing:.02em; color:var(--ink);
+  }
+  nav.links{ display:flex; gap:2.6rem; align-items:center; }
+  nav.links a{
+    font-family:var(--mono); font-size:.68rem; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--ink);
+    position:relative; padding-bottom:3px;
+    transition:color .35s var(--ease);
+    font-weight: 700;
+  }
+  nav.links a:hover{ color:var(--accent); }
+  .nav-cta{
+    font-family:var(--mono); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+    border:2px solid var(--ink); padding:.68rem 1.2rem; transition:.35s var(--ease);
+  }
+  .nav-cta:hover{ border-color:var(--accent); color:var(--accent); }
+  @media(max-width:820px){ nav.links a:not(.nav-cta){ display:none; } }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; align-items:center;
+    position:relative;
+    padding-top:120px; padding-bottom:70px;
+  }
+  .hero-grid{
+    position:relative; z-index:2;
+    display:grid; grid-template-columns:1.15fr .85fr; gap:5vw; align-items:center;
+    width:100%;
+  }
+  .hero-eyebrow{
+    font-family:var(--mono); font-size:.7rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:2rem; display:flex; align-items:center; gap:14px;
+    font-weight: 700;
+  }
+  .hero-eyebrow::before{ content:''; width:38px; height:2px; background:var(--accent); display:inline-block; }
+
+  .hero h1{
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(3.1rem, 6.2vw, 5.6rem);
+    line-height:0.96; letter-spacing:-.015em;
+    color:var(--ink);
+  }
+  .hero h1 em{
+    font-style:italic; font-weight:500; color:var(--accent);
+    display:block; font-size:.4em; margin-top:.7rem; letter-spacing:0;
+  }
+
+  .hero p.lede{
+    margin-top:2.1rem; max-width:40ch;
+    font-size:1.15rem; color:var(--ink); font-weight:500;
+  }
+
+  .cta-row{ display:flex; align-items:center; gap:2.3rem; margin-top:3.1rem; flex-wrap:wrap; }
+  .btn-primary{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    background:var(--ink); color:#fff; padding:1.1rem 2.2rem;
+    border-radius:1px; display:inline-flex; align-items:center; gap:10px;
+    transition:transform .4s var(--ease), background .4s var(--ease), box-shadow .4s var(--ease);
+    font-weight: 700;
+  }
+  .btn-primary:hover{ background:var(--accent); transform:translateY(-3px); box-shadow:0 20px 40px -16px rgba(53,97,127,.5); }
+
+  .hero-portrait{
+    position:relative; justify-self:end;
+    width:min(400px, 85vw);
+  }
+  .portrait-frame{
+    position:relative; aspect-ratio:2/3; overflow:hidden;
+    background:#fff;
+    box-shadow:var(--shadow);
+    border: 8px solid #fff;
+  }
+  .portrait-frame img{
+    width:100%; height:100%; object-fit:cover;
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{ padding:9.5rem 0; position:relative; }
+  .eyebrow{
+    font-family:var(--mono); font-size:.7rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:1.7rem; display:flex; align-items:center; gap:14px;
+    font-weight: 700;
+  }
+  .eyebrow::before{ content:''; width:38px; height:2px; background:var(--accent); display:inline-block; }
+
+  /* ---------- SOBRE ---------- */
+  .about-grid{ display:grid; grid-template-columns:.9fr 1.1fr; gap:6vw; align-items:start; }
+  .about-grid h2{
+    font-family:var(--serif); font-weight:600; font-size:clamp(1.95rem,3vw,2.7rem);
+    line-height:1.28; color:var(--ink);
+  }
+  .about-body p{ color:var(--ink); font-size:1.08rem; margin-bottom:1.35rem; max-width:52ch; font-weight: 500; }
+  .about-body p strong{ color:var(--accent); font-weight:700; }
+
+  /* ---------- SERVICOS ---------- */
+  .service-list{ margin-top:3.6rem; border-top:2px solid var(--line-strong); }
+  .service-row{
+    display:grid; grid-template-columns:.55fr 2fr 1fr; gap:2rem; align-items:center;
+    padding:2.5rem 0; border-bottom:2px solid var(--line-strong);
+  }
+  .service-row .num{ font-family:var(--mono); font-size:.75rem; color:var(--accent); font-weight: 700; }
+  .service-row h3{
+    font-family:var(--serif); font-weight:600; font-style:italic;
+    font-size:clamp(1.32rem,2.2vw,1.75rem); color:var(--ink);
+  }
+  .service-row p{ color:var(--ink); font-size:1rem; max-width:34ch; font-weight: 500; }
+
+  /* ---------- GALERIA FOTOS ---------- */
+  .gallery-section{ padding:9.5rem 0; }
+  .gallery-title{ text-align:center; margin-bottom:4rem; }
+  .gallery-title h2{
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(2rem,4vw,3rem); color:var(--ink); margin-top:1rem;
+  }
+  .photo-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:3rem;
+    margin-top:3rem;
+  }
+  .photo-card{
+    position:relative; overflow:hidden; aspect-ratio:4/3;
+    border-radius:12px; box-shadow:var(--shadow-sm);
+    background:#fff; border: 6px solid #fff;
+  }
+  .photo-card img{
+    width:100%; height:100%; object-fit:cover;
+  }
+  .photo-card .label{
+    position: absolute; bottom: 15px; left: 15px;
+    background: var(--ink); color: #fff;
+    padding: 6px 12px; font-family: var(--mono); font-size: 0.7rem;
+    border-radius: 4px; text-transform: uppercase;
+  }
+  
+  /* ---------- CONTATO ---------- */
+  .contact{ text-align:center; }
+  .contact h2{
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(2.4rem,5vw,4.1rem); max-width:18ch; margin:0 auto; line-height:1.14; color:var(--ink);
+  }
+  .contact h2 em{ color:var(--accent); font-style:italic; }
+  .contact-links{
+    margin-top:3.5rem; display:flex; justify-content:center; gap:3rem; flex-wrap:wrap;
+    font-family:var(--mono); font-size:.85rem; letter-spacing:.1em; text-transform:uppercase;
+    font-weight: 700;
+  }
+  .contact-links a{ color:var(--ink); border-bottom:2px solid var(--ink); padding-bottom:4px; transition:.35s; }
+  .contact-links a:hover{ color:var(--accent); border-color:var(--accent); }
+
+  footer{
+    padding:3.2rem 0 2.6rem; border-top:2px solid var(--line-strong);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
+    font-family:var(--mono); font-size:.7rem; letter-spacing:.09em; color:var(--ink); text-transform:uppercase;
+    font-weight: 700;
+  }
+
+  @media(max-width:900px){
+    .hero-grid{ grid-template-columns:1fr; gap:3.5rem; }
+    .hero-portrait{ justify-self:center; }
+    .about-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="wrap">
+    <div class="brand">Dra. Bianca Fernandes</div>
+    <nav class="links">
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#galeria">Exames</a>
+      <a href="#contato" class="nav-cta">Agendar Consulta</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-eyebrow">Medicina Veterinária</div>
+          <h1>Dra. Bianca Fernandes <em>Diagnóstico por Imagem</em></h1>
+          <p class="lede">Especialista em ultrassonografia veterinária, oferecendo precisão e cuidado para o diagnóstico do seu pet.</p>
+          <div class="cta-row">
+            <a href="#contato" class="btn-primary">Solicitar Atendimento</a>
+          </div>
+        </div>
+        <div class="hero-portrait">
+          <div class="portrait-frame">
+            <img src="images/bianca.png" alt="Dra. Bianca Fernandes">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-title">
+          <div class="eyebrow">A Profissional</div>
+          <h2>Dedicada ao bem-estar animal através da tecnologia.</h2>
+        </div>
+        <div class="about-body">
+          <p>Com anos de experiência em <strong>Diagnóstico por Imagem</strong>, a Dra. Bianca Fernandes atua com foco em ultrassonografia volante e domiciliar.</p>
+          <p>Seu trabalho une a precisão técnica necessária para diagnósticos complexos com o carinho e paciência indispensáveis no trato com cães e gatos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos">
+    <div class="wrap">
+      <div class="eyebrow">Serviços</div>
+      <div class="service-list">
+        <div class="service-row">
+          <div class="num">01</div>
+          <h3>Ultrassonografia Abdominal</h3>
+          <p>Avaliação detalhada de todos os órgãos internos para detecção de patologias.</p>
+        </div>
+        <div class="service-row">
+          <div class="num">02</div>
+          <h3>Atendimento Volante</h3>
+          <p>Parceria com clínicas veterinárias para realização de exames no local.</p>
+        </div>
+        <div class="service-row">
+          <div class="num">03</div>
+          <h3>Atendimento Domiciliar</h3>
+          <p>Conforto total para o seu pet, realizando o exame no ambiente onde ele se sente seguro.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <div class="wrap">
+      <div class="gallery-title">
+        <div class="eyebrow">Exames Realizados</div>
+        <h2>Tecnologia a serviço da vida</h2>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <img src="images/ultrassom_cachorro.jpg" alt="Ultrassom de Cachorro">
+          <div class="label">Ultrassom Canino</div>
+        </div>
+        <div class="photo-card">
+          <img src="images/ultrassom_gato.jpg" alt="Ultrassom de Gato">
+          <div class="label">Ultrassom Felino</div>
+        </div>
+        <div class="photo-card">
+          <img src="images/ultrassom_cachorro2.jpg" alt="Ultrassom Cardíaco Canino">
+          <div class="label">Diagnóstico Preciso</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="contact">
+    <div class="wrap">
+      <div class="eyebrow">Contato</div>
+      <h2>Pronta para cuidar do seu <em>melhor amigo</em>?</h2>
+      <div class="contact-links">
+        <a href="#">WhatsApp</a>
+        <a href="#">Instagram</a>
+        <a href="#">E-mail</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div>&copy; 2026 Dra. Bianca Fernandes</div>
+  <div>Mogi Guaçu &bull; Jundiaí &bull; SP</div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+</script>
+
+</body>
+</html>
